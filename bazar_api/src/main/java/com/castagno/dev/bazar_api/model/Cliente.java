@@ -4,11 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cliente {
 
     @Id
@@ -18,13 +22,4 @@ public class Cliente {
     private String apellido;
     private String dni;
 
-    public Cliente() {
-    }
-
-    public Cliente(String dni, String apellido, String nombre, Long id_cliente) {
-        this.dni = dni;
-        this.apellido = apellido;
-        this.nombre = nombre;
-        this.id_cliente = id_cliente;
-    }
 }
