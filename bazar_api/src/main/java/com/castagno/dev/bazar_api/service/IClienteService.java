@@ -1,20 +1,20 @@
 package com.castagno.dev.bazar_api.service;
 
-import com.castagno.dev.bazar_api.model.Cliente;
+import com.castagno.dev.bazar_api.dto.ClienteDTO;
 import java.util.List;
 
 public interface IClienteService {
     //Metodo READ todos los clientes
-    public List<Cliente> getClientes();
+    public List<ClienteDTO> getClientes();
 
     //metodo READ un cliente por id
-    public Cliente findCliente(Long id_cliente);
+    public ClienteDTO findCliente(Long id_cliente);
 
     //Metodo CREATE un cliente
-    public void saveCliente(Cliente cliente);
+    public ClienteDTO saveCliente(ClienteDTO clienteDto);
 
     //Metodo UPDATE un cliente
-    public void updateCliente(Cliente cliente);
+    public ClienteDTO updateCliente(Long id_cliente, ClienteDTO clienteDto);
 
     //Metodo DELETE un cliente
     public void deleteCliente(Long id_cliente);

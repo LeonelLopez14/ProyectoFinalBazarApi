@@ -1,21 +1,21 @@
 package com.castagno.dev.bazar_api.service;
 
-import com.castagno.dev.bazar_api.model.Venta;
+import com.castagno.dev.bazar_api.dto.VentaDTO;
 import java.util.List;
 
 public interface IVentaService {
 
     //Metodo READ todas las ventas
-    public List<Venta> getVentas();
+    public List<VentaDTO> getVentas();
 
     //metodo READ una venta por id
-    public Venta findVenta(Long codigo_venta);
+    public VentaDTO findVenta(Long codigo_venta);
 
     //Metodo CREATE una venta
-    public void saveVenta(Venta venta);
+    public VentaDTO saveVenta(VentaDTO ventaDto);
 
     //Metodo UPDATE una venta
-    public void  updateVenta(Venta venta);
+    public VentaDTO  updateVenta(Long codigo_venta, VentaDTO ventaDto);
 
     //Metodo DELETE una venta
     public void deleteVenta(Long codigo_venta);

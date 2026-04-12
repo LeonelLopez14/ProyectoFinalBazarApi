@@ -1,6 +1,6 @@
 package com.castagno.dev.bazar_api.service;
 
-import com.castagno.dev.bazar_api.model.Cliente;
+import com.castagno.dev.bazar_api.dto.ClienteDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,28 +9,27 @@ import java.util.List;
 public class ClienteService implements IClienteService {
 
     @Override
-    public void deleteCliente(Long id_cliente) {
-
-    }
-
-    @Override
-    public Cliente findCliente(Long id_cliente) {
-        return null;
-    }
-
-    @Override
-    public List<Cliente> getClientes() {
+    public List<ClienteDTO> getClientes() {
         return List.of();
     }
 
     @Override
-    public void saveCliente(Cliente cliente) {
-
+    public ClienteDTO findCliente(Long id_cliente) {
+        return null;
     }
 
     @Override
-    public void updateCliente(Cliente cliente) {
-
+    public ClienteDTO saveCliente(ClienteDTO clienteDto) {
+        return null;
     }
 
+    @Override
+    public ClienteDTO updateCliente(Long id_cliente, ClienteDTO clienteDto) {
+        return null;
+    }
+
+    @Override
+    public void deleteCliente(Long id_cliente) {
+
+    }
 }

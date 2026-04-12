@@ -1,32 +1,31 @@
 package com.castagno.dev.bazar_api.service;
 
-import com.castagno.dev.bazar_api.model.Venta;
+import com.castagno.dev.bazar_api.dto.VentaDTO;
 import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
 import java.util.List;
 
 @Service
 public class VentaService implements IVentaService{
 
+
     @Override
-    public List<Venta> getVentas() {
+    public List<VentaDTO> getVentas() {
         return List.of();
     }
 
     @Override
-    public Venta findVenta(Long codigo_venta) {
+    public VentaDTO findVenta(Long codigo_venta) {
         return null;
     }
 
     @Override
-    public void saveVenta(Venta venta) {
-
+    public VentaDTO saveVenta(VentaDTO ventaDto) {
+        return null;
     }
 
     @Override
-    public void updateVenta(Venta venta) {
-
+    public VentaDTO updateVenta(Long codigo_venta, VentaDTO ventaDto) {
+        return null;
     }
 
     @Override
