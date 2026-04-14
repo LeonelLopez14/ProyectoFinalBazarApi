@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 public class ProductoService implements IProductoService{
 
+
     @Autowired
     private IProductoRepository productoRepository;
 
@@ -50,7 +51,7 @@ public class ProductoService implements IProductoService{
                 .nombre(productoDto.getNombre())
                 .marca(productoDto.getMarca())
                 .precio(productoDto.getPrecio())
-                .cantidad_disponible(productoDto.getCantidad_disponible())
+                .cantidadDisponible(productoDto.getCantidadDisponible())
                 .venta(venta)
                 .build();
 
@@ -67,7 +68,7 @@ public class ProductoService implements IProductoService{
         producto.setNombre(productoDto.getNombre());
         producto.setMarca(productoDto.getMarca());
         producto.setPrecio(productoDto.getPrecio());
-        producto.setCantidad_disponible(productoDto.getCantidad_disponible());
+        producto.setCantidadDisponible(productoDto.getCantidadDisponible());
 
         // Si viene con venta asignada, la busco y asigno
         if (productoDto.getCodigo_venta() != null) {
@@ -87,4 +88,24 @@ public class ProductoService implements IProductoService{
         }
         productoRepository.deleteById(codigo_producto);
     }
+
+    @Override
+    public List<ProductoDTO> getProductosConStockBajo() {
+        return productoRepository.findByCantidadDisponibleLessThan(5)
+                .stream()
+                .map(Mapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    public List<ProductoDTO> getProductosByVenta(Long codigo_venta) {
+        if (!ventaRepository.existsById(codigo_venta)) {
+            throw new NotFoundException("No existe la venta con el id: " + codigo_venta);
+        }
+        return productoRepository.findByVentaId(codigo_venta)
+                .stream()
+                .map(Mapper::toDTO)
+                .toList();
+    }
 }
+

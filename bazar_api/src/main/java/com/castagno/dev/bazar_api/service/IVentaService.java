@@ -1,6 +1,10 @@
 package com.castagno.dev.bazar_api.service;
 
+import com.castagno.dev.bazar_api.dto.ResumenVentasDiaDTO;
 import com.castagno.dev.bazar_api.dto.VentaDTO;
+import com.castagno.dev.bazar_api.dto.VentaDestacadaDTO;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IVentaService {
@@ -19,5 +23,13 @@ public interface IVentaService {
 
     //Metodo DELETE una venta
     public void deleteVenta(Long codigo_venta);
+
+    // Sumatoria de monto y cantidad de ventas de un día
+    ResumenVentasDiaDTO getResumenPorDia(LocalDate fechaVenta);
+
+    // Venta con el monto más alto (con datos del cliente)
+    VentaDestacadaDTO getVentaConMayorMonto();
+
+
 
 }

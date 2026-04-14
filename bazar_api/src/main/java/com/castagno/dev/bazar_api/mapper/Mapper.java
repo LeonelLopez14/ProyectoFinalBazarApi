@@ -21,7 +21,7 @@ public class Mapper {
                 .nombre(p.getNombre())
                 .marca(p.getMarca())
                 .precio(p.getPrecio())
-                .cantidad_disponible(p.getCantidad_disponible())
+                .cantidadDisponible(p.getCantidadDisponible())
                 .codigo_venta(p.getVenta() != null ? p.getVenta().getCodigo_venta() : null)
                 .build();
     }
@@ -32,7 +32,7 @@ public class Mapper {
 
         return VentaDTO.builder()
                 .codigo_venta(v.getCodigo_venta())
-                .fecha_venta(v.getFecha_venta())
+                .fechaVenta(v.getFechaVenta())
                 .total(v.getTotal())
                 .listaProductos(
                         v.getListaProductos() != null

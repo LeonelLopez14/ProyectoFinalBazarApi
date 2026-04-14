@@ -21,4 +21,10 @@ public interface IProductoService {
     //Metodo DELETE un producto
     public void deleteProducto(Long codigo_producto);
 
+    // Productos con stock bajo (cantidad_disponible < 5)
+    List<ProductoDTO> getProductosConStockBajo();
+
+    // Productos de una venta específica
+    List<ProductoDTO> getProductosByVenta(Long codigo_venta);
+
 }

@@ -16,7 +16,7 @@ public class Producto {
     private String nombre;
     private String marca;
     private double precio;
-    private double cantidad_disponible;
+    private double cantidadDisponible;
 
     @ManyToOne
     @JoinColumn (name = "venta_FK")

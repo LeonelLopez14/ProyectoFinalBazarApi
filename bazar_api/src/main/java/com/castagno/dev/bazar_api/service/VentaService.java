@@ -1,6 +1,8 @@
 package com.castagno.dev.bazar_api.service;
 
+import com.castagno.dev.bazar_api.dto.ResumenVentasDiaDTO;
 import com.castagno.dev.bazar_api.dto.VentaDTO;
+import com.castagno.dev.bazar_api.dto.VentaDestacadaDTO;
 import com.castagno.dev.bazar_api.exception.NotFoundException;
 import com.castagno.dev.bazar_api.mapper.Mapper;
 import com.castagno.dev.bazar_api.model.Cliente;
@@ -12,9 +14,9 @@ import com.castagno.dev.bazar_api.repository.IVentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class VentaService implements IVentaService{
@@ -46,7 +48,7 @@ public class VentaService implements IVentaService{
     @Override
     public VentaDTO saveVenta(VentaDTO ventaDto) {
         Venta venta = new Venta();
-        venta.setFecha_venta(ventaDto.getFecha_venta());
+        venta.setFechaVenta(ventaDto.getFechaVenta());
         asignarProductosYCliente(venta, ventaDto);
         return Mapper.toDTO(ventaRepository.save(venta));
     }
@@ -56,7 +58,7 @@ public class VentaService implements IVentaService{
         //checkeo si existe el id en BD
         Venta venta = ventaRepository.findById(codigo_venta)
                 .orElseThrow((() -> new NotFoundException("Venta no encontrada")));
-        venta.setFecha_venta(ventaDto.getFecha_venta());
+        venta.setFechaVenta(ventaDto.getFechaVenta());
         asignarProductosYCliente(venta, ventaDto);
         return Mapper.toDTO(ventaRepository.save(venta));
     }
@@ -68,6 +70,35 @@ public class VentaService implements IVentaService{
             throw new NotFoundException("Producto no encontrado");
         }
         ventaRepository.deleteById(codigo_venta);
+    }
+    @Override
+    public ResumenVentasDiaDTO getResumenPorDia(LocalDate fecha) {
+        List<Venta> ventasDelDia = ventaRepository.findByFechaVenta(fecha);
+
+        long cantidad = ventasDelDia.size();
+        double sumatoria = ventasDelDia.stream()
+                .mapToDouble(Venta::getTotal)
+                .sum();
+
+        return ResumenVentasDiaDTO.builder()
+                .fecha(fecha)
+                .cantidadVentas(cantidad)
+                .montoTotal(sumatoria)
+                .build();
+    }
+
+    @Override
+    public VentaDestacadaDTO getVentaConMayorMonto() {
+        Venta venta = ventaRepository.findVentaConMayorTotal()
+                .orElseThrow(() -> new NotFoundException("No hay ventas registradas"));
+
+        return VentaDestacadaDTO.builder()
+                .codigo_venta(venta.getCodigo_venta())
+                .total(venta.getTotal())
+                .cantidadProductos(venta.getListaProductos().size())
+                .nombreCliente(venta.getUnCliente().getNombre())
+                .apellidoCliente(venta.getUnCliente().getApellido())
+                .build();
     }
 
     private void asignarProductosYCliente(Venta venta, VentaDTO ventaDto) {

@@ -13,7 +13,7 @@ public class VentaDTO {
 
     //datos venta
     private Long codigo_venta;
-    private LocalDate fecha_venta;
+    private LocalDate fechaVenta;
     private Double total;
     //datos productos
     private List<ProductoDTO> listaProductos;

@@ -18,7 +18,7 @@ public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long codigo_venta;
-    private LocalDate fecha_venta;
+    private LocalDate fechaVenta;
     private Double total;
 
     @OneToMany(mappedBy = "venta", fetch = FetchType.LAZY)
